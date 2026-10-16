@@ -78,13 +78,13 @@ These accent channels take precedence over a program's surface palette. Ordinary
 - **Light only.** Kami stays paper-colored even when the system appearance is dark. Disable it before using another theme.
 - Styles native Tern chrome, Markdown surfaces, theme-driven code colors, and terminal ANSI colors. It does not inject CSS into browser blocks or websites.
 - Installed on the local window side only. Installing it on a remote SSH host does not theme connected clients. Tern's Web client does not execute window plugins.
-- No dependencies, network requests, shell commands, or timers. The plugin installs one stylesheet and stores a font-preference backup in its local `tern.kv` data; only font-family preferences are written.
+- No dependencies, network requests, shell commands, or recurring timers. One deferred load callback performs font setup when needed, including an upgrade in an already-open window. The plugin installs one stylesheet and stores a font-preference backup in its local `tern.kv` data; only font-family preferences are written.
 - Existing layout, keyboard shortcuts, terminal font size, and focus behavior remain under Tern's control. Avoid enabling multiple global theme plugins together.
 
 - **仅浅色。** 系统为深色时也保持纸面配色；切换其他主题前请停用本插件。
 - 覆盖原生界面、Markdown、跟随主题的代码高亮及终端 ANSI 配色；不向浏览器面板或网页注入样式。
 - 只在本机窗口端生效。安装到远程 SSH 主机不会改变连接客户端的主题；Tern Web 客户端不运行窗口插件。
-- 零依赖，不联网、不执行外部命令、不设定时器。插件注册一个样式表，并通过本地 `tern.kv` 保存字体设置备份；只写入字体族偏好，不改其他设置。
+- 零依赖，不联网、不执行外部命令、不设循环定时器。加载后通过一次性回调按需配置字体，也支持已打开窗口中的插件升级。插件注册一个样式表，并通过本地 `tern.kv` 保存字体设置备份；只写入字体族偏好，不改其他设置。
 - 保留 Tern 的布局、快捷键、终端字号和焦点行为。请勿同时启用多个全局主题插件。
 
 ## Disable, remove, update / 停用、卸载、更新
@@ -127,9 +127,9 @@ Native rendering checks cover primary-button hover, tab hover and selection chan
 
 已通过原生渲染检查主按钮悬停、标签悬停与选中切换、程序强调色覆盖、语义色保留、宿主浅色／深色外观、减少动态效果／增强对比度及 760 × 560 紧凑窗口。
 
-Font checks use a separate native window and cover first-load setup, regular/bold/italic/bold-italic terminal faces, grid alignment, Markdown inline/fenced code, code blocks, diffs, and code/mono/key spans. Repeated apply preserves the original backup; manual choices survive reload; restoration and a subsequent apply/restore survive restart.
+Font checks use a separate native window and cover first-load and existing-window upgrade setup, regular/bold/italic/bold-italic terminal faces, grid alignment, Markdown inline/fenced code, code blocks, diffs, and code/mono/key spans. Repeated apply preserves the original backup; manual choices survive reload; restoration and a subsequent apply/restore survive restart.
 
-字体检查在隔离原生窗口中完成，覆盖首次自动配置、终端常规／粗体／斜体／粗斜体、网格对齐、Markdown 行内与围栏代码、代码块、差异视图及 code／mono／key 文本。重复应用保留最初备份，手动选择不被重载覆盖；恢复、重启和再次应用／恢复均已验证。
+字体检查在隔离原生窗口中完成，覆盖首次自动配置、已打开窗口中的插件升级、终端常规／粗体／斜体／粗斜体、网格对齐、Markdown 行内与围栏代码、代码块、差异视图及 code／mono／key 文本。重复应用保留最初备份，手动选择不被重载覆盖；恢复、重启和再次应用／恢复均已验证。
 
 ## Credits & license / 致谢与许可
 

@@ -48,7 +48,10 @@ local function restoreFonts(cx: WindowCx)
 	tern.kv.set(snapshotKey, snapshot)
 end
 
-tern.on("window_start", function(cx: WindowCx)
+-- window_start is not repeated when an already-open window upgrades the plugin.
+-- A one-shot load callback also handles that case; no polling or recurring timer.
+tern.timer(0, function(cx: WindowCx?)
+	assert(cx, "Kami font setup requires a window context")
 	-- Apply once per installation's retained plugin data, not on every reload.
 	if tern.kv.get(snapshotKey) == nil then
 		applyFonts(cx)
