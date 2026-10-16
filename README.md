@@ -4,7 +4,7 @@ A warm-paper theme for [Tern](https://stencil.so/tern), inspired by [Kami](https
 
 暖纸底色、墨蓝强调色、衬线字体。将 Kami 的纸面风格带进 Tern。
 
-![Kami theme rendered in Tern: bilingual prose, syntax highlighting, and status badges](assets/preview.png)
+![Kami theme rendered in Tern: selected sidebar tab, ink-blue actions and emphasis, and semantic status colors](assets/preview.png)
 
 Native Tern rendering with synthetic demonstration content, not a live agent conversation.
 截图由 Tern 原生渲染，内容为排版演示，不是真实会话。
@@ -38,9 +38,9 @@ Install the fonts locally, then restart Tern. Charter ships with macOS. Get 仓�
 
 先在系统中安装字体，再重启 Tern。macOS 自带 Charter；仓耳今楷请从[仓耳字库](https://tsanger.cn/)获取，JetBrains Mono 请从[官网](https://www.jetbrains.com/lp/mono/)获取，并遵守各自的字体授权。仓库不分发字体文件；缺失字体时使用上表中的后备字体。
 
-**Terminal grid and code:** Tern measures terminal cells from its **Font** preference. This plugin does not override `--tv-font` or rewrite that preference. To match the screenshot, set **Font** and **Code font** to `JetBrains Mono` in Tern's settings. Keep a monospace face for these fields; never use Charter or 仓耳今楷 as the terminal grid font.
+**Terminal grid and code:** Tern measures terminal cells from its **Font** preference. This plugin does not override `--tv-font` or rewrite that preference. For JetBrains Mono, set **Font** and **Code font** to `JetBrains Mono` in Tern's settings. Keep a monospace face for these fields; never use Charter or 仓耳今楷 as the terminal grid font.
 
-**终端与代码：** Tern 根据 **Font** 设置计算字符网格。插件不覆盖 `--tv-font`，也不改写你的字体设置。要获得截图中的效果，在 Tern 设置中把 **Font** 和 **Code font** 设为 `JetBrains Mono`。这两个位置应使用等宽字体，不要把 Charter 或仓耳今楷用于终端网格。
+**终端与代码：** Tern 根据 **Font** 设置计算字符网格。插件不覆盖 `--tv-font`，也不改写你的字体设置。如需使用 JetBrains Mono，在 Tern 设置中把 **Font** 和 **Code font** 设为 `JetBrains Mono`。这两个位置应使用等宽字体，不要把 Charter 或仓耳今楷用于终端网格。
 
 Tern currently parses but ignores CSS `@font-face`, so bundling a webfont would not install it. [Native CSS support](https://docs.stencil.so/tern/styles/css.html#font-face).
 
@@ -53,15 +53,21 @@ Tern 目前会解析但忽略 CSS `@font-face`，插件无法通过网页字体�
 | Paper / 暖纸 | `#f5f4ed` |
 | Ivory / 象牙白 | `#faf9f5` |
 | Sand / 细线与衬底 | `#e8e6dc` |
+| Sidebar / 左侧导航底色 | `#eeece2` |
+| Selected tab / 已选中标签底色 | `#dce2e7` |
 | Code / 代码背景 | `#f0eee6` |
 | Ink / 正文 | `#141413` |
 | Blue / 墨蓝 | `#1b365d` |
 | Secondary blue / 次级蓝 | `#2d5a8a` |
 | Muted / 次要文字 | `#6b6a64` |
 
-The core colors and font stacks come from [Kami's stylesheet](https://kami.tw93.fun/styles.css). Functional success, warning, error, activity, and 16 ANSI colors extend that palette for terminal use. Inline RGB/true-color output and a program's own palette can still choose their own colors.
+The core colors and font stacks come from [Kami's stylesheet](https://kami.tw93.fun/styles.css). Primary buttons, loading indicators, progress, headings, emphasized text, links, tool titles, and model/thinking labels use ink blue. The sidebar uses a slightly deeper warm paper; selected tabs add a blue-gray fill, ink-blue edge, and stronger text. Hover stays distinct from selection.
 
-基础颜色和字体栈取自 [Kami 样式表](https://kami.tw93.fun/styles.css)；另补充终端所需的成功、警告、错误、运行中状态和 16 色 ANSI 调色板。程序直接输出的 RGB 真彩色或自定义调色板仍由程序决定。
+基础颜色和字体栈取自 [Kami 样式表](https://kami.tw93.fun/styles.css)。主按钮、加载与进度、标题、重点文字、链接、工具标题及模型／思考标签统一使用墨蓝。左侧导航采用略深的暖纸色；选中标签增加浅蓝灰底、墨蓝侧线和加粗文字，悬停态与选中态保持区分。
+
+These accent channels take precedence over a program's surface palette. Ordinary prose, explicit success/warning/error colors, syntax colors, and inline RGB/true-color output retain their own colors. Terminal ANSI and theme-driven semantic colors have Kami-compatible defaults.
+
+上述强调色优先于程序的 Surface 调色板。普通正文、明确的成功／警告／错误颜色、代码语法色和直接输出的 RGB 真彩色仍保留自身配色；终端 ANSI 和跟随主题的语义色使用与 Kami 协调的默认值。
 
 ## Behavior / 使用边界
 
@@ -69,13 +75,13 @@ The core colors and font stacks come from [Kami's stylesheet](https://kami.tw93.
 - Styles native Tern chrome, Markdown surfaces, theme-driven code colors, and terminal ANSI colors. It does not inject CSS into browser blocks or websites.
 - Installed on the local window side only. Installing it on a remote SSH host does not theme connected clients. Tern's Web client does not execute window plugins.
 - No dependencies, network requests, shell commands, timers, or preference writes. The entry reads `kami.css` and installs one stylesheet.
-- Existing layout, keyboard shortcuts, terminal font size, focus behavior, and program colors remain under Tern's control. Avoid enabling multiple global theme plugins together.
+- Existing layout, keyboard shortcuts, terminal font size, and focus behavior remain under Tern's control. Avoid enabling multiple global theme plugins together.
 
 - **仅浅色。** 系统为深色时也保持纸面配色；切换其他主题前请停用本插件。
 - 覆盖原生界面、Markdown、跟随主题的代码高亮及终端 ANSI 配色；不向浏览器面板或网页注入样式。
 - 只在本机窗口端生效。安装到远程 SSH 主机不会改变连接客户端的主题；Tern Web 客户端不运行窗口插件。
 - 零依赖；不联网、不执行命令、不设定时器、不改写偏好设置。入口只读取 `kami.css` 并注册一个样式表。
-- 保留 Tern 的布局、快捷键、终端字号、焦点行为及程序自定义颜色。请勿同时启用多个全局主题插件。
+- 保留 Tern 的布局、快捷键、终端字号和焦点行为。请勿同时启用多个全局主题插件。
 
 ## Disable, remove, update / 停用、卸载、更新
 
@@ -112,6 +118,10 @@ Edit `kami.css`, then reload with `tern plugin reload`. `window.luau` installs i
 Use a separate `TERN_CONFIG_DIR` and `TERN_DAEMON_SOCKET` for testing. Native plugin loading requires an ordinary Tern window: `tern serve` deliberately skips user plugins. A headless CSS preview can load the file with `tern ctl --control SOCKET css kami /absolute/path/to/kami.css`.
 
 测试时使用独立的 `TERN_CONFIG_DIR` 与 `TERN_DAEMON_SOCKET`。真实插件加载应通过普通 Tern 窗口验证，`tern serve` 有意不加载用户插件；无窗口样式预览可通过上述 `tern ctl … css` 命令加载样式表。
+
+Native rendering checks cover primary-button hover, tab hover and selection changes, conflicting program accent palettes, preserved semantic colors, light/dark host appearance, reduced motion/increased contrast, and a 760 × 560 compact window.
+
+已通过原生渲染检查主按钮悬停、标签悬停与选中切换、程序强调色覆盖、语义色保留、宿主浅色／深色外观、减少动态效果／增强对比度及 760 × 560 紧凑窗口。
 
 ## Credits & license / 致谢与许可
 

@@ -8,6 +8,7 @@
   --kami-paper: #f5f4ed;
   --kami-ivory: #faf9f5;
   --kami-sand: #e8e6dc;
+  --kami-sidebar: #eeece2;
   --kami-code: #f0eee6;
   --kami-blue: #1b365d;
   --kami-blue-light: #2d5a8a;
@@ -49,8 +50,8 @@
   --warn: #855b20 !important;
   --bad: #9d433f !important;
   --bad-fill: #9d433f !important;
-  --live: #65557c !important;
-  --live-fill: #65557c !important;
+  --live: var(--kami-blue) !important;
+  --live-fill: var(--kami-blue) !important;
 
   --page: var(--kami-paper) !important;
   --panel: var(--kami-paper) !important;
@@ -123,10 +124,116 @@
   --tk-string: var(--ok);
   --tk-number: var(--warn);
   --tk-type: #326a70;
-  --tk-operator: var(--live);
+  --tk-operator: #65557c;
   --tk-punct: var(--kami-olive);
   --tk-inserted: var(--ok);
   --tk-deleted: var(--bad);
+}
+
+/* A slightly deeper paper separates navigation from the conversation. */
+#sidebar {
+  background: var(--kami-sidebar) !important;
+  box-shadow: inset -1px 0 0 var(--kami-sand);
+}
+
+#sidebar .tn-vt .nav-row:not(.on):hover {
+  background: var(--kami-sand) !important;
+}
+
+#sidebar .tn-vt .nav-row.on {
+  color: var(--kami-blue) !important;
+  background: #dce2e7 !important;
+  box-shadow: inset 3px 0 0 var(--kami-blue);
+  font-weight: 600;
+}
+
+#sidebar .tn-vt .nav-row.on:hover {
+  background: #d3dce4 !important;
+}
+
+/* Emphasis is ink blue; paragraphs, code, and semantic status text keep
+   their own colors. Do not turn every transcript word into an accent. */
+.sf-region .sf-md .md h1,
+.sf-region .sf-md .md h2,
+.sf-region .sf-md .md h3,
+.sf-region .sf-md .md h4,
+.sf-region .sf-md .md h5,
+.sf-region .sf-md .md h6,
+.sf-region .sf-md .md strong,
+.sf-region .sf-md .sf-t-strong:not(.sf-t-error):not(.sf-t-warning):not(.sf-t-success):not(.sf-t-ins):not(.sf-t-del),
+.sf-region .sf-text:not(.sf-act) .sf-t-strong:not(.sf-t-error):not(.sf-t-warning):not(.sf-t-success):not(.sf-t-ins):not(.sf-t-del),
+.sf-region .sf-tool:not(.st-error):not(.st-cancelled) .sf-tool-title {
+  color: var(--kami-blue);
+}
+
+/* Surface colors are resolved again on each region, often from an inline
+   program palette. Root --accent alone cannot reach these controls. */
+.sf-region {
+  --sf-accent: var(--kami-blue) !important;
+  --sf-c-accent: var(--kami-blue) !important;
+  --sf-p-accent: var(--kami-blue) !important;
+  --sf-info: var(--kami-blue) !important;
+  --sf-c-info: var(--kami-blue) !important;
+  --sf-p-borderAccent: var(--kami-blue) !important;
+  --sf-c-link: var(--kami-blue) !important;
+  --sf-p-mdLink: var(--kami-blue) !important;
+  --sf-p-mdHeading: var(--kami-blue) !important;
+  --sf-p-toolTitle: var(--kami-blue) !important;
+  --sf-p-customMessageLabel: var(--kami-blue) !important;
+  --sf-p-statusLineModel: var(--kami-blue) !important;
+  --sf-p-thinkingText: var(--kami-blue) !important;
+  --sf-p-thinkingMinimal: var(--kami-blue) !important;
+  --sf-p-thinkingLow: var(--kami-blue) !important;
+  --sf-p-thinkingMedium: var(--kami-blue) !important;
+  --sf-p-thinkingHigh: var(--kami-blue) !important;
+  --sf-p-thinkingXhigh: var(--kami-blue) !important;
+  --sf-p-thinkingMax: var(--kami-blue) !important;
+  --sf-tint-pending: #1b365d0f !important;
+  --sf-sel: #1b365d1a !important;
+  --sf-mark-bg: #1b365d26 !important;
+}
+
+/* Primary actions use solid ink, secondary actions keep the paper visible.
+   Leave destructive controls and disabled-state behavior to Tern. */
+.btn.primary:not(.danger):not(.bad),
+button.sf-el[data-tone='accent'] {
+  color: var(--kami-ivory);
+  background: var(--kami-blue);
+  border-color: var(--kami-blue);
+}
+
+.btn.primary:not(.danger):not(.bad):not(:disabled):hover,
+button.sf-el[data-tone='accent']:not([aria-disabled='true']):hover {
+  background: var(--kami-blue-light);
+  border-color: var(--kami-blue-light);
+}
+
+.sf-region .sf-tool-act,
+.sf-region .sf-tool-more,
+.sf-region .sf-code-more {
+  color: var(--kami-blue);
+}
+
+/* Use the same ink for the working label and its native Spindle indicator.
+   Keep Tern's motion, pause, and reduced-motion rules unchanged. */
+.sf-region [data-role='omp.working'],
+.sf-region [data-role='omp.working'] .sf-spindle,
+.sf-region .sf-shimmer:not([data-tone='error']):not([data-tone='warning']):not([data-tone='success']),
+.sf-region .sf-fx-shimmer:not(.sf-t-error):not(.sf-t-warning):not(.sf-t-success) {
+  --sh-lo: var(--kami-blue-light) !important;
+  --sh-mid: var(--kami-blue) !important;
+  --sh-hi: var(--kami-blue-light) !important;
+  color: var(--kami-blue);
+}
+
+.sf-region .sf-tool.st-running .sf-tool-spin {
+  color: var(--kami-blue);
+}
+
+.sf-region .sf-tool.st-running .sf-tool-bar,
+.sf-region .sf-agent.st-running .sf-agent-g .live {
+  color: var(--kami-blue);
+  background-color: var(--kami-blue);
 }
 
 /* Reading is proportional; code, diffs, inputs and the terminal grid are not.
