@@ -254,15 +254,21 @@ button.sf-el[data-tone='accent']:not([aria-disabled='true']):hover {
   font-family: var(--kami-mono) !important;
 }
 
-/* Auxiliary notices and full Todo lists should not dominate the prose.
-   Change text size only; keep native row geometry and interaction targets. */
+/* Auxiliary notices, full usage rows and Todo lists should not dominate prose.
+   Keep compact usage rows, native row geometry and interaction targets. */
 .sf-region [data-role='omp.status-block'] .sf-text,
+.sf-region [data-role='omp.usage'],
 .sf-region .sf-checklist.full {
   font-size: calc(var(--sf-fs) * 0.9);
 }
 
 .sf-region .sf-checklist.full .sf-ck-note {
   font-size: 0.9em;
+}
+
+/* Paths have their own native size; scale it without resizing tool names. */
+.sf-region .sf-tool-target.path {
+  zoom: 0.9;
 }
 
 /* Balance JetBrains Mono against the surrounding prose without changing the

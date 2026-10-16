@@ -1,6 +1,6 @@
 schema = 1
 id = "tern-kami"
-name = "Kami"
+name = "Tern Kami"
 version = "1.1.2"
 description = "Kami-inspired warm paper, ink blue, and serif typography for Tern."
 window = "window.luau"

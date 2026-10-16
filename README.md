@@ -1,4 +1,4 @@
-# tern-kami
+# Tern Kami
 
 A warm-paper theme for [Tern](https://stencil.so/tern), inspired by [Kami](https://kami.tw93.fun/) by Tw93.
 
@@ -50,13 +50,13 @@ Tern currently parses but ignores CSS `@font-face`, so bundling a webfont would 
 
 Tern 目前会解析但忽略 CSS `@font-face`，插件无法通过网页字体自动安装字体。
 
-Tool-card code, diffs, and ANSI output render at 90% of their configured size to balance JetBrains Mono with the surrounding prose. This does not change native font preferences, prose, standalone code blocks, tool headers or controls, or Session headings.
+Tool-card code, diffs, ANSI output, and header file paths render at 90% of their configured size to balance JetBrains Mono with the surrounding prose. This does not change native font preferences, prose, standalone code blocks, tool names or controls, or Session headings.
 
-工具卡片中的代码、差异及 ANSI 输出按原字号的 90% 显示，使 JetBrains Mono 与周围正文更协调。不改原生字体偏好、正文、独立代码块、工具标题和操作控件，也不调整 Session 标题。
+工具卡片中的代码、差异、ANSI 输出及标题中的文件路径按原字号的 90% 显示，使 JetBrains Mono 与周围正文更协调。不改原生字体偏好、正文、独立代码块、工具名称和操作控件，也不调整 Session 标题。
 
-Background-job/process status notices and full Todo lists also use 90% text sizing, with Todo notes kept smaller than task text. Status colors, icons, disclosure targets, and the compact Todo HUD retain their native behavior.
+Background-job/process status notices, full timestamp/usage rows, and full Todo lists also use 90% text sizing, with Todo notes kept smaller than task text. Already-compact usage rows, status colors, icons, disclosure targets, and the compact Todo HUD retain their native behavior.
 
-后台任务／进程状态提示和完整 Todo 列表的文字同样按 90% 显示，Todo 备注保持比任务正文更小。状态颜色、图标、折叠操作区域及紧凑 Todo 浮条保留原生行为。
+后台任务／进程状态提示、完整时间与用量统计行、完整 Todo 列表的文字同样按 90% 显示，Todo 备注保持比任务正文更小。原本紧凑的统计行、状态颜色、图标、折叠操作区域及紧凑 Todo 浮条保留原生行为。
 
 ## Palette / 配色
 
@@ -141,9 +141,9 @@ Font checks use a separate native window and cover first-load and existing-windo
 
 字体检查在隔离原生窗口中完成，覆盖首次自动配置、已打开窗口中的插件升级、终端常规／粗体／斜体／粗斜体、网格对齐、Markdown 行内与围栏代码、代码块、差异视图及 code／mono／key 文本。重复应用保留最初备份，手动选择不被重载覆盖；恢复、重启和再次应用／恢复均已验证。
 
-Tool-content sizing is checked in the native renderer with mixed Chinese/English output, aligned columns, first/last-line previews, expand/collapse, scrolling to the final line, text selection, and compact-window wrapping. Status notices and full Todo lists cover long-text wrapping, with Todo disclosure checked by mouse and keyboard.
+Tool-content sizing is checked in the native renderer with mixed Chinese/English output, aligned columns, first/last-line previews, expand/collapse, scrolling to the final line, text selection, and compact-window wrapping. Status notices and full Todo lists cover long-text wrapping, with Todo disclosure checked by mouse and keyboard. Tool-header paths and full usage rows cover narrow-window ellipsis/wrapping and mouse/keyboard disclosure; native tool-name, compact-usage, and standalone-code sizes remain unchanged.
 
-工具内容字号通过原生渲染验证，覆盖中英文混排、列对齐、首尾预览、展开／折叠、滚动至末行、文字选取及窄窗口换行。状态提示与完整 Todo 列表覆盖长文本换行，Todo 折叠展开同时验证鼠标和键盘操作。
+工具内容字号通过原生渲染验证，覆盖中英文混排、列对齐、首尾预览、展开／折叠、滚动至末行、文字选取及窄窗口换行。状态提示与完整 Todo 列表覆盖长文本换行，Todo 折叠展开同时验证鼠标和键盘操作。工具标题路径与完整统计行验证了窄窗口省略／换行及鼠标／键盘折叠操作；工具名称、紧凑统计行与独立代码块的原生字号保持不变。
 
 ## Credits & license / 致谢与许可
 
