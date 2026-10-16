@@ -215,15 +215,15 @@ button.sf-el[data-tone='accent']:not([aria-disabled='true']):hover {
   color: var(--kami-blue);
 }
 
-/* Use the same ink for the working label and its native Spindle indicator.
-   Keep Tern's motion, pause, and reduced-motion rules unchanged. */
+/* Keep a readable blue-gray baseline and a distinct ink-blue sweep on paper.
+   Preserve Tern's motion, pause, and reduced-motion rules. */
 .sf-region [data-role='omp.working'],
 .sf-region [data-role='omp.working'] .sf-spindle,
 .sf-region .sf-shimmer:not([data-tone='error']):not([data-tone='warning']):not([data-tone='success']),
 .sf-region .sf-fx-shimmer:not(.sf-t-error):not(.sf-t-warning):not(.sf-t-success) {
-  --sh-lo: var(--kami-blue-light) !important;
-  --sh-mid: var(--kami-blue) !important;
-  --sh-hi: var(--kami-blue-light) !important;
+  --sh-lo: color-mix(in srgb, var(--kami-blue) 70%, var(--kami-paper)) !important;
+  --sh-mid: var(--kami-blue-light) !important;
+  --sh-hi: var(--kami-blue) !important;
   color: var(--kami-blue);
 }
 
