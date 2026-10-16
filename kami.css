@@ -254,6 +254,65 @@ button.sf-el[data-tone='accent']:not([aria-disabled='true']):hover {
   font-family: var(--kami-mono) !important;
 }
 
+/* Balance JetBrains Mono against the surrounding prose without changing the
+   terminal preference or shrinking tool headers, controls and standalone code. */
+.sf-tool .sf-code,
+.sf-tool .sf-diff {
+  zoom: 0.9;
+}
+
+/* Tern 0.8 paints ANSI glyphs natively: font-size/zoom alone changes layout,
+   not the glyphs. Scale the canvas inside its clip, leaving the native
+   head/tail controls in their original order and at their original size. */
+.sf-tool .sf-ansi .sf-term-clip {
+  height: auto !important;
+  display: grid;
+  grid-template-rows: minmax(0, 0.9fr);
+  overflow: hidden;
+}
+
+.sf-tool .sf-ansi .tv-mini {
+  min-height: 0;
+  align-self: start;
+  width: calc(100% / 0.9);
+  transform: scale(0.9);
+  transform-origin: top left;
+}
+
+.sf-tool .sf-ansi .sf-term-clip.clamped {
+  display: block;
+  max-height: calc(var(--sf-clip) * 0.9);
+}
+
+/* Native tail offsets use the original grid; keep the scaled last row aligned
+   with the scaled preview's bottom rather than clipping it off. */
+.sf-tool .sf-ansi .sf-term-clip.fade-top .tv-mini {
+  transform-origin: bottom left;
+  translate: 0 calc(var(--sf-clip) * -0.1);
+}
+
+/* Scrollable output has a bounded viewport. Scale the viewport and its native
+   scroll coordinates together, rather than shortening only its painted content. */
+.sf-tool .sf-ansi.scroll {
+  width: calc(100% / 0.9);
+  transform: scale(0.9);
+  transform-origin: top left;
+}
+
+.sf-tool .sf-ansi.scroll .sf-term-clip {
+  display: block;
+}
+
+.sf-tool .sf-ansi.scroll .sf-term-clip.clamped {
+  max-height: var(--sf-clip);
+}
+
+.sf-tool .sf-ansi.scroll .tv-mini {
+  width: auto;
+  transform: none;
+  translate: none;
+}
+
 /* Tern 0.8's command palette has its own material instead of --pop-bg. */
 #pal .tn-cmdk {
   background: var(--kami-ivory);

@@ -50,6 +50,10 @@ Tern currently parses but ignores CSS `@font-face`, so bundling a webfont would 
 
 Tern 目前会解析但忽略 CSS `@font-face`，插件无法通过网页字体自动安装字体。
 
+Tool-card code, diffs, and ANSI output render at 90% of their configured size to balance JetBrains Mono with the surrounding prose. This does not change native font preferences, prose, standalone code blocks, tool headers or controls, or Session headings.
+
+工具卡片中的代码、差异及 ANSI 输出按原字号的 90% 显示，使 JetBrains Mono 与周围正文更协调。不改原生字体偏好、正文、独立代码块、工具标题和操作控件，也不调整 Session 标题。
+
 ## Palette / 配色
 
 | Token / 用途 | Color |
@@ -130,6 +134,10 @@ Native rendering checks cover primary-button hover, tab hover and selection chan
 Font checks use a separate native window and cover first-load and existing-window upgrade setup, regular/bold/italic/bold-italic terminal faces, grid alignment, Markdown inline/fenced code, code blocks, diffs, and code/mono/key spans. Repeated apply preserves the original backup; manual choices survive reload; restoration and a subsequent apply/restore survive restart.
 
 字体检查在隔离原生窗口中完成，覆盖首次自动配置、已打开窗口中的插件升级、终端常规／粗体／斜体／粗斜体、网格对齐、Markdown 行内与围栏代码、代码块、差异视图及 code／mono／key 文本。重复应用保留最初备份，手动选择不被重载覆盖；恢复、重启和再次应用／恢复均已验证。
+
+Tool-content sizing is checked in the native renderer with mixed Chinese/English output, aligned columns, first/last-line previews, expand/collapse, scrolling to the final line, text selection, and compact-window wrapping.
+
+工具内容字号通过原生渲染验证，覆盖中英文混排、列对齐、首尾预览、展开／折叠、滚动至末行、文字选取及窄窗口换行。
 
 ## Credits & license / 致谢与许可
 
