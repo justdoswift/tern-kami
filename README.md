@@ -81,14 +81,14 @@ These accent channels take precedence over a program's surface palette. Ordinary
 
 - **Light only.** Kami stays paper-colored even when the system appearance is dark. Disable it before using another theme.
 - Styles native Tern chrome, Markdown surfaces, theme-driven code colors, and terminal ANSI colors. It does not inject CSS into browser blocks or websites.
-- Working-text shimmer uses a readable blue-gray baseline and a distinct ink-blue sweep. Native animation timing and reduced-motion behavior are preserved.
+- Working-text shimmer uses deep ink-blue text with a brighter blue sweep. The highlight remains readable on paper and card backgrounds; native animation timing and reduced-motion behavior are preserved.
 - Installed on the local window side only. Installing it on a remote SSH host does not theme connected clients. Tern's Web client does not execute window plugins.
 - No dependencies, network requests, shell commands, or recurring timers. One deferred load callback performs font setup when needed, including an upgrade in an already-open window. The plugin installs one stylesheet and stores a font-preference backup in its local `tern.kv` data; only font-family preferences are written.
 - Existing layout, keyboard shortcuts, terminal font size, and focus behavior remain under Tern's control. Avoid enabling multiple global theme plugins together.
 
 - **仅浅色。** 系统为深色时也保持纸面配色；切换其他主题前请停用本插件。
 - 覆盖原生界面、Markdown、跟随主题的代码高亮及终端 ANSI 配色；不向浏览器面板或网页注入样式。
-- 工作状态文字采用清晰的灰蓝底色与深墨蓝扫光，保留原生动画速度和减少动态效果行为。
+- 工作状态文字采用更深的墨蓝底色与更亮的蓝色扫光，高亮在纸面与卡片底色上仍清晰可读；保留原生动画速度和减少动态效果行为。
 - 只在本机窗口端生效。安装到远程 SSH 主机不会改变连接客户端的主题；Tern Web 客户端不运行窗口插件。
 - 零依赖，不联网、不执行外部命令、不设循环定时器。加载后通过一次性回调按需配置字体，也支持已打开窗口中的插件升级。插件注册一个样式表，并通过本地 `tern.kv` 保存字体设置备份；只写入字体族偏好，不改其他设置。
 - 保留 Tern 的布局、快捷键、终端字号和焦点行为。请勿同时启用多个全局主题插件。

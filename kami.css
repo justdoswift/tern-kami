@@ -215,16 +215,16 @@ button.sf-el[data-tone='accent']:not([aria-disabled='true']):hover {
   color: var(--kami-blue);
 }
 
-/* Keep a readable blue-gray baseline and a distinct ink-blue sweep on paper.
+/* Keep the status text deep ink blue, with a brighter, readable blue sweep.
    Preserve Tern's motion, pause, and reduced-motion rules. */
 .sf-region [data-role='omp.working'],
 .sf-region [data-role='omp.working'] .sf-spindle,
 .sf-region .sf-shimmer:not([data-tone='error']):not([data-tone='warning']):not([data-tone='success']),
 .sf-region .sf-fx-shimmer:not(.sf-t-error):not(.sf-t-warning):not(.sf-t-success) {
-  --sh-lo: color-mix(in srgb, var(--kami-blue) 70%, var(--kami-paper)) !important;
+  --sh-lo: color-mix(in srgb, var(--kami-blue) 50%, var(--kami-ink)) !important;
   --sh-mid: var(--kami-blue-light) !important;
-  --sh-hi: var(--kami-blue) !important;
-  color: var(--kami-blue);
+  --sh-hi: color-mix(in srgb, var(--kami-blue-light) 87%, var(--kami-paper)) !important;
+  color: var(--sh-lo);
 }
 
 .sf-region .sf-tool.st-running .sf-tool-spin {
