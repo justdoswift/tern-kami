@@ -1,0 +1,168 @@
+/*
+ * tern-kami — Kami's paper-and-ink palette for Tern.
+ * Palette and font stacks adapted from https://kami.tw93.fun/styles.css
+ * Copyright (c) 2026 Tw93; Copyright (c) 2026 Ge Peng. MIT; see LICENSE.
+ */
+
+:root {
+  --kami-paper: #f5f4ed;
+  --kami-ivory: #faf9f5;
+  --kami-sand: #e8e6dc;
+  --kami-code: #f0eee6;
+  --kami-blue: #1b365d;
+  --kami-blue-light: #2d5a8a;
+  --kami-ink: #141413;
+  --kami-warm: #3d3d3a;
+  --kami-olive: #504e49;
+  --kami-stone: #6b6a64;
+  --kami-serif: Charter, Georgia, "TsangerJinKai02", "Source Han Serif SC", "Source Han Serif CN", "Noto Serif CJK SC", "Noto Serif SC", "Songti SC", Palatino, serif;
+  --kami-mono: "JetBrains Mono", "Fira Code", "SF Mono", Consolas, Monaco, monospace;
+
+  /* A deliberately light theme, including when Tern's appearance is dark.
+     !important beats the selected theme's inline colors, not saved settings. */
+  color-scheme: light !important;
+  --ink: var(--kami-ink) !important;
+  --t1: var(--kami-ink) !important;
+  --t2: var(--kami-warm) !important;
+  --t3: var(--kami-stone) !important;
+  --t4: var(--kami-stone) !important;
+  --ink2: var(--kami-olive) !important;
+  --ink3: var(--kami-stone) !important;
+  --ink4: #d7d5ca !important;
+  --l1: #eae8df !important;
+  --l2: var(--kami-sand) !important;
+  --l3: #cfcdc2 !important;
+  --l4: #a5a397 !important;
+
+  --accent: var(--kami-blue) !important;
+  --accent-ink: var(--kami-blue) !important;
+  --accent-fill: var(--kami-blue) !important;
+  --a1: var(--kami-blue) !important;
+  --a2: var(--kami-blue) !important;
+  --grad-ink: var(--kami-ivory) !important;
+  --ink-pen: var(--kami-blue) !important;
+  --ink-pen-fill: var(--kami-blue) !important;
+
+  /* Functional status colors extend Kami's neutral palette. */
+  --ok: #3f6748 !important;
+  --ok-fill: #3f6748 !important;
+  --warn: #855b20 !important;
+  --bad: #9d433f !important;
+  --bad-fill: #9d433f !important;
+  --live: #65557c !important;
+  --live-fill: #65557c !important;
+
+  --page: var(--kami-paper) !important;
+  --panel: var(--kami-paper) !important;
+  --card: var(--kami-ivory) !important;
+  --raise: var(--kami-sand) !important;
+  --code-bg: var(--kami-code) !important;
+  --tbl-head: var(--kami-sand) !important;
+  --chip-bg: var(--kami-code) !important;
+  --pop-bg: var(--kami-ivory) !important;
+  --well: var(--kami-ivory) !important;
+  --well-line: var(--kami-sand) !important;
+  --fog: var(--kami-paper) !important;
+  --dim: #f5f4edcc !important;
+  --glass-hi: var(--kami-ivory) !important;
+  --rail: var(--kami-blue-light) !important;
+  --grid-dot: #d7d5ca !important;
+
+  /* Flatten Tern's glass materials; keep its layout and focus treatment. */
+  --topbar-bg: var(--kami-paper) !important;
+  --sheet-a: var(--kami-ivory) !important;
+  --sheet-b: var(--kami-ivory) !important;
+  --sheet-rim: none !important;
+  --sheet-in: none !important;
+  --sheet-drop: 0 8px 24px #14141314 !important;
+  --xp-bg: var(--kami-paper) !important;
+  --tile-a: var(--kami-ivory) !important;
+  --tile-b: var(--kami-ivory) !important;
+  --cv-base: var(--kami-paper) !important;
+  --cv-glow: none !important;
+
+  --r-chip: 4px;
+  --r-ctl: 6px;
+  --r-card: 8px;
+  --r-panel: 10px;
+  --sans: var(--kami-serif) !important;
+  --mono: var(--kami-mono) !important;
+
+  --tv-bg: var(--kami-paper) !important;
+  --tv-fg: var(--kami-ink) !important;
+  --tv-cur: var(--kami-blue) !important;
+  --tv-cur-ink: var(--kami-ivory) !important;
+  --tv-sel: #1b365d26 !important;
+  --tv-sel-a: #1b365d26 !important;
+  --tv-sel-b: #1b365d26 !important;
+  --tv-m1: #855b2033 !important;
+  --tv-m2: #1b365d33 !important;
+  --tv-m3: #65557c33 !important;
+
+  --ansi0: #141413 !important;
+  --ansi1: #9d433f !important;
+  --ansi2: #3f6748 !important;
+  --ansi3: #855b20 !important;
+  --ansi4: #1b365d !important;
+  --ansi5: #65557c !important;
+  --ansi6: #326a70 !important;
+  --ansi7: #e8e6dc !important;
+  --ansi8: #6b6a64 !important;
+  --ansi9: #ae4842 !important;
+  --ansi10: #476f4d !important;
+  --ansi11: #896020 !important;
+  --ansi12: #2d5a8a !important;
+  --ansi13: #79618a !important;
+  --ansi14: #357278 !important;
+  --ansi15: #faf9f5 !important;
+
+  --tk-comment: var(--kami-stone);
+  --tk-keyword: var(--kami-blue);
+  --tk-function: var(--kami-blue-light);
+  --tk-variable: var(--kami-ink);
+  --tk-string: var(--ok);
+  --tk-number: var(--warn);
+  --tk-type: #326a70;
+  --tk-operator: var(--live);
+  --tk-punct: var(--kami-olive);
+  --tk-inserted: var(--ok);
+  --tk-deleted: var(--bad);
+}
+
+/* Reading is proportional; code, diffs, inputs and the terminal grid are not.
+   Never override --tv-font: Tern measures its grid from the Font preference. */
+.sf-md {
+  font-family: var(--kami-serif);
+  line-height: 1.65;
+}
+
+.sf-md code,
+.sf-md pre,
+.sf-code,
+.sf-diff,
+.sf-t-code,
+.sf-t-mono,
+.sf-t-key {
+  font-family: var(--kami-mono);
+}
+
+/* Tern 0.8's command palette has its own material instead of --pop-bg. */
+#pal .tn-cmdk {
+  background: var(--kami-ivory);
+  border: 1px solid var(--kami-sand);
+  border-radius: var(--r-panel);
+  box-shadow: 0 8px 24px #14141314;
+}
+
+/* Preserve the system's request for stronger text and visible separators. */
+@media (prefers-contrast: more) {
+  :root {
+    --t1: #000000 !important;
+    --t2: #141413 !important;
+    --t3: #3d3d3a !important;
+    --t4: #504e49 !important;
+    --l1: #cfcdc2 !important;
+    --l2: #a5a397 !important;
+    --l3: #6b6a64 !important;
+  }
+}
