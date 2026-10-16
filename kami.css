@@ -88,6 +88,7 @@
   --r-panel: 10px;
   --sans: var(--kami-serif) !important;
   --mono: var(--kami-mono) !important;
+  --code-font: var(--kami-mono) !important;
 
   --tv-bg: var(--kami-paper) !important;
   --tv-fg: var(--kami-ink) !important;
@@ -236,21 +237,21 @@ button.sf-el[data-tone='accent']:not([aria-disabled='true']):hover {
   background-color: var(--kami-blue);
 }
 
-/* Reading is proportional; code, diffs, inputs and the terminal grid are not.
-   Never override --tv-font: Tern measures its grid from the Font preference. */
+/* Grid metrics come from the native Font preference, applied by window.luau.
+   Keep prose proportional and explicit code spans monospace. */
 .sf-md {
   font-family: var(--kami-serif);
   line-height: 1.65;
 }
 
-.sf-md code,
-.sf-md pre,
+.sf-region .sf-md code,
+.sf-region .sf-md pre,
 .sf-code,
 .sf-diff,
 .sf-t-code,
 .sf-t-mono,
 .sf-t-key {
-  font-family: var(--kami-mono);
+  font-family: var(--kami-mono) !important;
 }
 
 /* Tern 0.8's command palette has its own material instead of --pop-bg. */

@@ -15,9 +15,9 @@ Native Tern rendering with synthetic demonstration content, not a live agent con
 tern plugin install https://github.com/justdoswift/tern-kami
 ```
 
-The theme applies when the plugin loads. It is a **plugin**, not an entry in Tern's built-in theme picker. If a window has not refreshed, run `tern plugin reload` or reopen it. Requires Tern's window-plugin and CSS APIs; verified on **Tern 0.8.4, macOS**. Windows, Linux, and iOS have not been tested.
+The theme applies when the plugin loads, including one-time font setup through Tern's native settings API. It is a **plugin**, not an entry in Tern's built-in theme picker. If a window has not refreshed, run `tern plugin reload` or reopen it. Requires Tern's window-plugin, CSS, and `cx.settings` APIs; verified on **Tern 0.8.4, macOS**. Windows, Linux, and iOS have not been tested.
 
-安装后随插件加载生效。这是**主题插件**，不是内置主题列表中的一个选项。窗口未刷新时，运行 `tern plugin reload` 或重新打开窗口。已在 **macOS / Tern 0.8.4** 验证；Windows、Linux、iOS 尚未验证。
+安装后随插件加载生效，并通过 Tern 原生设置接口完成一次字体配置。这是**主题插件**，不是内置主题列表中的一个选项。窗口未刷新时，运行 `tern plugin reload` 或重新打开窗口。需要窗口插件、CSS 和 `cx.settings` 接口；已在 **macOS / Tern 0.8.4** 验证，Windows、Linux、iOS 尚未验证。
 
 For a local checkout / 本地开发：
 
@@ -32,15 +32,19 @@ tern plugin link ./tern-kami
 | --- | --- |
 | Interface and Latin prose / 界面与西文正文 | Charter → Georgia → serif |
 | Chinese prose / 中文正文 | TsangerJinKai02（仓耳今楷 02）→ Source Han / Noto Serif → Songti SC |
-| Monospace fallback / 等宽后备字体 | JetBrains Mono → Fira Code → system monospace |
+| Code, inline code, monospace status text, and terminal / 代码、行内代码、等宽状态文字及终端 | JetBrains Mono → Fira Code → system monospace |
 
 Install the fonts locally, then restart Tern. Charter ships with macOS. Get 仓耳今楷 from [Tsanger](https://tsanger.cn/) and [JetBrains Mono from JetBrains](https://www.jetbrains.com/lp/mono/); follow each font's own license. Font binaries are not distributed by this repository. Missing fonts fall back through the stacks above.
 
 先在系统中安装字体，再重启 Tern。macOS 自带 Charter；仓耳今楷请从[仓耳字库](https://tsanger.cn/)获取，JetBrains Mono 请从[官网](https://www.jetbrains.com/lp/mono/)获取，并遵守各自的字体授权。仓库不分发字体文件；缺失字体时使用上表中的后备字体。
 
-**Terminal grid and code:** Tern measures terminal cells from its **Font** preference. This plugin does not override `--tv-font` or rewrite that preference. For JetBrains Mono, set **Font** and **Code font** to `JetBrains Mono` in Tern's settings. Keep a monospace face for these fields; never use Charter or 仓耳今楷 as the terminal grid font.
+**Automatic font setup:** On first load, the plugin saves the previous six font-family preferences, then atomically sets **Font** and **Code font** to the JetBrains Mono stack and **UI font** to the Charter/仓耳今楷 stack. Bold, italic, and bold-italic overrides are cleared to use the selected terminal family's own faces. Font sizes and weights are unchanged. The native API recalculates terminal cells and cursor metrics; the plugin never overrides `--tv-font` in CSS.
 
-**终端与代码：** Tern 根据 **Font** 设置计算字符网格。插件不覆盖 `--tv-font`，也不改写你的字体设置。如需使用 JetBrains Mono，在 Tern 设置中把 **Font** 和 **Code font** 设为 `JetBrains Mono`。这两个位置应使用等宽字体，不要把 Charter 或仓耳今楷用于终端网格。
+**自动配置字体：** 首次加载时，插件先保存原有的六项字体族设置，再一次性将 **Font**、**Code font** 设为 JetBrains Mono 字体栈，将 **UI font** 设为 Charter／仓耳今楷字体栈。粗体、斜体和粗斜体的独立覆盖清空，改用所选终端字体自身的字形。不改字号和字重。原生接口会重新计算字符网格和光标尺寸，插件不通过 CSS 覆盖 `--tv-font`。
+
+Setup runs only once while the plugin's data is retained. Reloads, restarts, and upgrades do not reset later manual choices. The command palette offers **Apply Kami fonts / 应用 Kami 字体** to apply them again, and **Restore previous fonts / 恢复原字体** to undo the saved settings. Restore only changes fields still matching the plugin's values, preserving your later manual changes. A new apply after restoration saves the then-current fonts.
+
+保留插件数据期间，自动配置只执行一次，重载、重启和升级不会重置你之后手动选择的字体。命令面板提供 **Apply Kami fonts / 应用 Kami 字体**，可再次应用；**Restore previous fonts / 恢复原字体** 可恢复保存的设置，只还原仍与插件设置一致的字段，保留你之后的手动更改。恢复后再次应用，会保存当时的新字体设置。
 
 Tern currently parses but ignores CSS `@font-face`, so bundling a webfont would not install it. [Native CSS support](https://docs.stencil.so/tern/styles/css.html#font-face).
 
@@ -74,20 +78,20 @@ These accent channels take precedence over a program's surface palette. Ordinary
 - **Light only.** Kami stays paper-colored even when the system appearance is dark. Disable it before using another theme.
 - Styles native Tern chrome, Markdown surfaces, theme-driven code colors, and terminal ANSI colors. It does not inject CSS into browser blocks or websites.
 - Installed on the local window side only. Installing it on a remote SSH host does not theme connected clients. Tern's Web client does not execute window plugins.
-- No dependencies, network requests, shell commands, timers, or preference writes. The entry reads `kami.css` and installs one stylesheet.
+- No dependencies, network requests, shell commands, or timers. The plugin installs one stylesheet and stores a font-preference backup in its local `tern.kv` data; only font-family preferences are written.
 - Existing layout, keyboard shortcuts, terminal font size, and focus behavior remain under Tern's control. Avoid enabling multiple global theme plugins together.
 
 - **仅浅色。** 系统为深色时也保持纸面配色；切换其他主题前请停用本插件。
 - 覆盖原生界面、Markdown、跟随主题的代码高亮及终端 ANSI 配色；不向浏览器面板或网页注入样式。
 - 只在本机窗口端生效。安装到远程 SSH 主机不会改变连接客户端的主题；Tern Web 客户端不运行窗口插件。
-- 零依赖；不联网、不执行命令、不设定时器、不改写偏好设置。入口只读取 `kami.css` 并注册一个样式表。
+- 零依赖，不联网、不执行外部命令、不设定时器。插件注册一个样式表，并通过本地 `tern.kv` 保存字体设置备份；只写入字体族偏好，不改其他设置。
 - 保留 Tern 的布局、快捷键、终端字号和焦点行为。请勿同时启用多个全局主题插件。
 
 ## Disable, remove, update / 停用、卸载、更新
 
-Turn off **Kami** in **Settings → Plugins** to return to your saved Tern theme. To remove an installed copy:
+To restore the original fonts as well, run **Restore previous fonts / 恢复原字体** from the command palette **before** disabling or removing Kami. Then turn it off in **Settings → Plugins** to remove its CSS and return to your saved Tern theme. Disabling/removing the plugin alone leaves the native font preferences in place. To remove an installed copy:
 
-在 **Settings → Plugins** 关闭 **Kami** 即可恢复原有主题。卸载安装副本：
+如需同时恢复原字体，请在停用或卸载 Kami **之前**，先从命令面板运行 **Restore previous fonts / 恢复原字体**。再到 **Settings → Plugins** 关闭 Kami，移除样式并恢复原有主题。仅停用或卸载插件不会撤回已经保存的原生字体设置。卸载安装副本：
 
 ```sh
 tern plugin remove tern-kami
@@ -122,6 +126,10 @@ Use a separate `TERN_CONFIG_DIR` and `TERN_DAEMON_SOCKET` for testing. Native pl
 Native rendering checks cover primary-button hover, tab hover and selection changes, conflicting program accent palettes, preserved semantic colors, light/dark host appearance, reduced motion/increased contrast, and a 760 × 560 compact window.
 
 已通过原生渲染检查主按钮悬停、标签悬停与选中切换、程序强调色覆盖、语义色保留、宿主浅色／深色外观、减少动态效果／增强对比度及 760 × 560 紧凑窗口。
+
+Font checks use a separate native window and cover first-load setup, regular/bold/italic/bold-italic terminal faces, grid alignment, Markdown inline/fenced code, code blocks, diffs, and code/mono/key spans. Repeated apply preserves the original backup; manual choices survive reload; restoration and a subsequent apply/restore survive restart.
+
+字体检查在隔离原生窗口中完成，覆盖首次自动配置、终端常规／粗体／斜体／粗斜体、网格对齐、Markdown 行内与围栏代码、代码块、差异视图及 code／mono／key 文本。重复应用保留最初备份，手动选择不被重载覆盖；恢复、重启和再次应用／恢复均已验证。
 
 ## Credits & license / 致谢与许可
 
